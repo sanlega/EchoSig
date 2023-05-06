@@ -14,3 +14,5 @@ Desde el proyecto:
 		docker run -p 8080:8080 --name test_luis -t spring-helloworld
 
 Usando IntelliJ y siguiendo la guía https://www.docker.com/blog/kickstart-your-spring-boot-application-development/
+
+OpenApi guide https://www.baeldung.com/spring-rest-openapi-documentation
