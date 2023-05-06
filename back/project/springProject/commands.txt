@@ -1,0 +1,16 @@
+Desde el proyecto:
+	Build:
+		./mvnw package
+
+	Run:
+		java -jar target/spring-boot-docker-0.0.1-SNAPSHOT.jar
+
+	Docker:
+		docker build --platform linux/amd64 -t spring-helloworld .
+
+	Run Docker:
+		docker run -p 8080:8080 -t spring-helloworld
+
+		docker run -p 8080:8080 --name test_luis -t spring-helloworld
+
+Usando IntelliJ y siguiendo la guía https://www.docker.com/blog/kickstart-your-spring-boot-application-development/
