@@ -1,0 +1,17 @@
+Desde el proyecto:
+
+
+Guide https://www.baeldung.com/ops/docker-mysql-container
+
+https://gandalab.com/como-crear-configurar-utilizar-mysql-en-un-contenedor-de-docker/
+
+
+docker exec -it mySql  bash
+docker exec -it mySql /bin/bash
+
+mysql -h localhost -u root -ppass
+
+
+docker build -t echosigdatabase .
+
+docker run --name echoSigDatabase -d -p 3306:3306 echosigdatabase
