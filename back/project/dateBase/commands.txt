@@ -1,6 +1,0 @@
-Desde el proyecto:
-
-
-Guide https://www.baeldung.com/ops/docker-mysql-container
-
-https://gandalab.com/como-crear-configurar-utilizar-mysql-en-un-contenedor-de-docker/
