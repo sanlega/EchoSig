@@ -1,0 +1,27 @@
+version: '3'
+services:
+  echosig_site:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    ports:
+      - "4242:4242"
+  echosigspring:
+    build:
+      context: ./back/project/springProject
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - echosigdatabase
+  echosigdatabase:
+    build:
+      context: ./back/project/dataBase
+      dockerfile: Dockerfile
+    environment:
+      MYSQL_ROOT_PASSWORD: pass
+      MYSQL_DATABASE: echoSigDataBase
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./back/project/dataBase:/docker-entrypoint-initdb.d 
