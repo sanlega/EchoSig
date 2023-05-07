@@ -68,6 +68,31 @@ INSERT INTO Event (nodeId, time) VALUES
                                      (2, '2023-05-05 16:45:00'),
                                      (3, '2023-05-06 10:00:00');
 
+INSERT INTO User (username, email, password) VALUES ('Alice', 'alice@example.com', 'password1');
+INSERT INTO User (username, email, password) VALUES ('Bob', 'bob@example.com', 'password2');
+INSERT INTO User (username, email, password) VALUES ('Charlie', 'charlie@example.com', 'password3');
+INSERT INTO User (username, email, password) VALUES ('David', 'david@example.com', 'password4');
+
+INSERT INTO Destination (service, endpoint) VALUES ('Service A', 'https://servicea.example.com');
+INSERT INTO Destination (service, endpoint) VALUES ('Service B', 'https://serviceb.example.com');
+INSERT INTO Destination (service, endpoint) VALUES ('Service C', 'https://servicec.example.com');
+INSERT INTO Destination (service, endpoint) VALUES ('Service D', 'https://serviced.example.com');
+
+INSERT INTO Type (destinationId, message) VALUES (1, 'Type 1');
+INSERT INTO Type (destinationId, message) VALUES (2, 'Type 2');
+INSERT INTO Type (destinationId, message) VALUES (3, 'Type 3');
+INSERT INTO Type (destinationId, message) VALUES (4, 'Type 4');
+
+INSERT INTO Node (userId, typeId, address) VALUES (1, 1, 'address1');
+INSERT INTO Node (userId, typeId, address) VALUES (2, 2, 'address2');
+INSERT INTO Node (userId, typeId, address) VALUES (3, 3, 'address3');
+INSERT INTO Node (userId, typeId, address) VALUES (4, 4, 'address4');
+
+INSERT INTO Event (nodeId, time) VALUES (1, NOW());
+INSERT INTO Event (nodeId, time) VALUES (2, NOW());
+INSERT INTO Event (nodeId, time) VALUES (3, NOW());
+INSERT INTO Event (nodeId, time) VALUES (4, NOW());
+
 -- Definimos un nuevo delimitador
 DELIMITER $$
 
@@ -266,6 +291,28 @@ CREATE PROCEDURE DeleteEvent(
 BEGIN
 DELETE FROM Event
 WHERE eventId = p_eventId;
+END $$
+
+-- Eventos
+CREATE PROCEDURE GetEvents()
+BEGIN
+SELECT u.username, n.address, n.nodeId, d.service, e.time
+FROM Event e
+         JOIN Node n ON e.nodeId = n.nodeId
+         JOIN Type t ON n.typeId = t.typeId
+         JOIN Destination d ON t.destinationId = d.destinationId
+         JOIN User u ON n.userId = u.userId;
+END $$
+
+CREATE PROCEDURE GetEventInfo(IN p_nodeId INT)
+BEGIN
+SELECT u.username, n.address, n.nodeId, d.service, e.time
+FROM User u
+         JOIN Node n ON n.userId = u.userId
+         JOIN Type t ON t.typeId = n.typeId
+         JOIN Destination d ON d.destinationId = t.destinationId
+         JOIN Event e ON e.nodeId = n.nodeId
+WHERE n.nodeId = p_nodeId;
 END $$
 
 -- Restauramos el delimitador original
