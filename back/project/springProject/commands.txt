@@ -1,0 +1,15 @@
+Desde el proyecto:
+	Build:
+		./mvnw package
+
+	Run:
+		java -jar target/spring-boot-docker-0.0.1-SNAPSHOT.jar
+
+	Docker:
+		docker build --platform linux/amd64 -t echosigspring .
+
+		docker run -p 8080:8080 --name echoSigSpring -t echosigspring
+
+Usando IntelliJ y siguiendo la guía https://www.docker.com/blog/kickstart-your-spring-boot-application-development/
+
+OpenApi guide https://www.baeldung.com/spring-rest-openapi-documentation
