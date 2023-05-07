@@ -12,3 +12,20 @@
 
 @tailwind components;
 @tailwind utilities;
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: calc(100vw - 256px);
+  margin: 0 auto;
+}
+
+.userlist {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-width: 375px;
+}
