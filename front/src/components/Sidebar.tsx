@@ -39,9 +39,8 @@ export const Sidebar = () => {
           </div>
         </div>
       </div>
-
-      <div className="relative lg:block hidden ">
-        <div className="flex justify-center gap-y-3 fixed inset-y-0 left-0 w-64 bg-gray-100 border-r">
+      <div className="fixed lg:block hidden">
+        <div className="flex justify-center fixed top-0 left-0 h-screen w-64 bg-gray-100 border-r">
           <div className="px-8 py-4">
             <ul>
               <li>
