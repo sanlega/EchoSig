@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import App from "./App.tsx";
 import "./index.css";
 import { Dashboard } from "./Routes/Dashboard";
 import { ErrorPage } from "./Routes/ErrorPage";
 import { GetStarted } from "./Routes/GetStarted";
 import { AddUser } from "./Routes/AddUser";
+import { User } from "./Routes/User";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +21,10 @@ const router = createBrowserRouter([
   {
     path: "/adduser",
     element: <AddUser />,
+  },
+  {
+    path: "/user/:userId",
+    element: <User />,
   },
 ]);
 
