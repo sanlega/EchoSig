@@ -42,6 +42,32 @@ CREATE TABLE Event (
                        FOREIGN KEY (nodeId) REFERENCES Node(nodeId)
 );
 
+INSERT INTO User (username, email, password) VALUES
+                                                 ('JohnDoe', 'johndoe@example.com', 'password123'),
+                                                 ('JaneSmith', 'janesmith@example.com', 'password456'),
+                                                 ('BobJohnson', 'bobjohnson@example.com', 'password789');
+INSERT INTO Destination (service, endpoint) VALUES
+                                                ('Email', 'https://api.email.com'),
+                                                ('SMS', 'https://api.sms.com'),
+                                                ('Push Notification', 'https://api.push.com');
+INSERT INTO Type (destinationId, message) VALUES
+                                              (1, 'Welcome to our service!'),
+                                              (2, 'Your appointment is coming up soon.'),
+                                              (3, 'A new version of our app is available for download.');
+INSERT INTO Node (userId, typeId, address) VALUES
+                                               (1, 1, 'johndoe@example.com'),
+                                               (1, 2, '555-555-1234'),
+                                               (2, 1, 'janesmith@example.com'),
+                                               (3, 3, 'https://www.example.com/app');
+INSERT INTO Event (nodeId, time) VALUES
+                                     (1, '2023-05-01 12:30:00'),
+                                     (2, '2023-05-02 09:15:00'),
+                                     (1, '2023-05-02 15:00:00'),
+                                     (3, '2023-05-03 14:30:00'),
+                                     (1, '2023-05-04 11:00:00'),
+                                     (2, '2023-05-05 16:45:00'),
+                                     (3, '2023-05-06 10:00:00');
+
 -- Definimos un nuevo delimitador
 DELIMITER $$
 
