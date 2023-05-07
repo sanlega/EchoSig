@@ -2,9 +2,9 @@ package com.example.springbootdocker.controller.manage;
 
 import com.example.springbootdocker.model.User;
 import com.example.springbootdocker.service.UserService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import javax.sql.DataSource;
 import java.util.List;
@@ -20,7 +20,27 @@ public class UserController {
     }
 
     @GetMapping(value = "/user")
-    public List<User> getUsers() {
+    public ResponseEntity<?> getUsers() {
         return userService.getUsers();
+    }
+
+    @GetMapping(value = "/user/{userId}")
+    public ResponseEntity<?> getUser(@PathVariable("userId") int userId) {
+        return userService.getUser(userId);
+    }
+
+    @PostMapping(value = "/user")
+    public ResponseEntity<String> addUser(@RequestBody User user) {
+        return userService.addUser(user);
+    }
+
+    @PutMapping(value = "/user")
+    public ResponseEntity<String> updateUser(@RequestBody User user) {
+        return userService.updateUser(user);
+    }
+
+    @DeleteMapping(value = "/user/{userId}")
+    public ResponseEntity<String> deleteUser(@PathVariable("userId") int userId) {
+        return userService.deleteUser(userId);
     }
 }

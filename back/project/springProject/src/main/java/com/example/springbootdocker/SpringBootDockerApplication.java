@@ -21,7 +21,7 @@ public class SpringBootDockerApplication {
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/echoSigDataBase");
+		dataSource.setUrl("jdbc:mysql://echosigdatabase:3306/echoSigDataBase?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true");
 		dataSource.setUsername("root");
 		dataSource.setPassword("pass");
 		return dataSource;
