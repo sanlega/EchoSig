@@ -7,7 +7,7 @@ https://gandalab.com/como-crear-configurar-utilizar-mysql-en-un-contenedor-de-do
 
 
 docker exec -it mySql  bash
-docker exec -it mySql /bin/bash
+docker exec -it echoSigDatabase /bin/bash
 
 mysql -h localhost -u root -ppass
 
