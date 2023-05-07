@@ -90,13 +90,15 @@ public class UserService {
 
     public ResponseEntity<String> deleteUser(int userId) {
         try (Connection connection = dataSource.getConnection();
-             CallableStatement statement = connection.prepareCall("{CALL DeleteUser(?)}")) {
+             CallableStatement statement = connection.prepareCall("{CALL DeleteUser(?, ?)}")) {
             statement.setInt(1, userId);
-            int rowsAffected = statement.executeUpdate();
+            statement.registerOutParameter(2, Types.INTEGER);
+            statement.execute();
+            int rowsAffected = statement.getInt(2);
             if (rowsAffected > 0) {
                 return new ResponseEntity<>(HttpStatus.OK);
             } else {
-                return new ResponseEntity<>("No rows affected", HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<>("No rows affected", HttpStatus.BAD_REQUEST);
             }
         } catch (SQLException e) {
             return new ResponseEntity<>(e.toString(), HttpStatus.INTERNAL_SERVER_ERROR);

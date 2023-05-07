@@ -110,13 +110,15 @@ WHERE userId = p_userId;
 END $$
 
 CREATE PROCEDURE DeleteUser(
-    IN p_userId INT
+    IN p_userId INT,
+    OUT p_rowsAffected INT
 )
 BEGIN
 START TRANSACTION;
 DELETE FROM Event WHERE nodeId IN (SELECT nodeId FROM Node WHERE userId = p_userId);
 DELETE FROM Node WHERE userId = p_userId;
 DELETE FROM User WHERE userId = p_userId;
+SET p_rowsAffected = ROW_COUNT();
 COMMIT;
 END $$
 
