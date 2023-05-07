@@ -72,19 +72,27 @@ INSERT INTO Event (nodeId, time) VALUES
 DELIMITER $$
 
 -- Stored procedures para la tabla User
-CREATE PROCEDURE GetUser()
+CREATE PROCEDURE GetUsers()
 BEGIN
 SELECT * FROM User;
 END $$
 
+CREATE PROCEDURE GetUser(
+    IN p_userId INT
+)
+BEGIN
+SELECT * FROM User WHERE userId = p_userId;
+END $$
+
 CREATE PROCEDURE AddUser(
+    IN p_userId INT,
     IN p_username VARCHAR(50),
     IN p_email VARCHAR(100),
     IN p_password VARCHAR(255)
 )
 BEGIN
-INSERT INTO User(username, email, password)
-VALUES(p_username, p_email, p_password);
+INSERT INTO User(userId, username, email, password)
+VALUES(p_userId, p_username, p_email, p_password);
 END $$
 
 CREATE PROCEDURE UpdateUser(
@@ -105,8 +113,11 @@ CREATE PROCEDURE DeleteUser(
     IN p_userId INT
 )
 BEGIN
-DELETE FROM User
-WHERE userId = p_userId;
+START TRANSACTION;
+DELETE FROM Event WHERE nodeId IN (SELECT nodeId FROM Node WHERE userId = p_userId);
+DELETE FROM Node WHERE userId = p_userId;
+DELETE FROM User WHERE userId = p_userId;
+COMMIT;
 END $$
 
 -- Stored procedures para la tabla Node
